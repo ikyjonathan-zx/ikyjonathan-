@@ -1,0 +1,443 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <title>Rifky Jonathan Tambuwun — Portfolio & Profile</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Plus Jakarta Sans', 'sans-serif'],
+          },
+          colors: {
+            forest: {
+              950: '#011c16',
+              900: '#022c22',
+              800: '#064e3b',
+              700: '#047857',
+            },
+            emerald: {
+              400: '#34d399',
+              500: '#10b981',
+              600: '#059669',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Base & Custom Scrollbar */
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    body {
+      background: radial-gradient(circle at 15% 15%, #064e3b 0%, #022c22 48%, #011813 100%);
+      color: #f8fafc;
+      min-height: 100vh;
+      overflow-x: hidden;
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* Ambient Animated Orbs */
+    .ambient-orb {
+      position: fixed;
+      border-radius: 9999px;
+      filter: blur(80px);
+      z-index: 0;
+      pointer-events: none;
+      opacity: 0.45;
+      animation: floatOrb 14s ease-in-out infinite alternate;
+    }
+
+    .orb-1 {
+      width: 340px;
+      height: 340px;
+      background: #10b981;
+      top: -80px;
+      left: -80px;
+    }
+
+    .orb-2 {
+      width: 400px;
+      height: 400px;
+      background: #047857;
+      bottom: -100px;
+      right: -100px;
+      animation-delay: -5s;
+    }
+
+    .orb-3 {
+      width: 260px;
+      height: 260px;
+      background: #34d399;
+      top: 45%;
+      left: 55%;
+      opacity: 0.2;
+      animation-duration: 18s;
+    }
+
+    @keyframes floatOrb {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(25px, -30px) scale(1.08); }
+      100% { transform: translate(-20px, 20px) scale(0.95); }
+    }
+
+    /* Glassmorphism Cards with High Contrast Readability */
+    .glass-panel {
+      background: linear-gradient(145deg, rgba(255, 255, 255, 0.13) 0%, rgba(255, 255, 255, 0.05) 100%);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid rgba(255, 255, 255, 0.22);
+      box-shadow: 0 20px 45px -15px rgba(0, 0, 0, 0.55), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+    }
+
+    .glass-card {
+      background: rgba(2, 44, 34, 0.62);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+      transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+                  border-color 0.3s ease,
+                  background-color 0.3s ease,
+                  box-shadow 0.3s ease;
+    }
+
+    .glass-card:hover, .glass-card:active {
+      transform: translateY(-3px) scale(1.01);
+      border-color: rgba(52, 211, 153, 0.65);
+      background: rgba(6, 78, 59, 0.72);
+      box-shadow: 0 12px 28px rgba(16, 185, 129, 0.22);
+    }
+
+    .glass-white-tint {
+      background: rgba(255, 255, 255, 0.11);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.24);
+    }
+
+    /* Profile Photo Glow & Floating */
+    .profile-ring {
+      position: relative;
+      animation: profileFloat 5s ease-in-out infinite;
+    }
+
+    .profile-ring::before {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      border-radius: 9999px;
+      background: conic-gradient(from 0deg, #34d399, #ffffff, #10b981, #064e3b, #34d399);
+      animation: spinSlow 8s linear infinite;
+      z-index: -1;
+      opacity: 0.9;
+    }
+
+    @keyframes profileFloat {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-7px); }
+    }
+
+    @keyframes spinSlow {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Page Transition & Staggered Item Animations */
+    .page-section {
+      display: none;
+      opacity: 0;
+    }
+
+    .page-section.active {
+      display: block;
+      animation: pageFadeIn 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    @keyframes pageFadeIn {
+      from {
+        opacity: 0;
+        transform: translateY(14px) scale(0.985);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    /* Staggered Point Animations */
+    .anim-item {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .page-section.active .anim-item {
+      animation: staggerSlideUp 0.55s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+      animation-delay: calc(var(--i, 0) * 85ms);
+    }
+
+    .page-section.active .anim-pop {
+      animation: staggerPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+      animation-delay: calc(var(--i, 0) * 85ms);
+    }
+
+    @keyframes staggerSlideUp {
+      from {
+        opacity: 0;
+        transform: translateY(22px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes staggerPop {
+      from {
+        opacity: 0;
+        transform: scale(0.88) translateY(14px);
+      }
+      to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+      }
+    }
+
+    /* Touch Ripple Effect */
+    .touch-ripple {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .ripple-circle {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.35);
+      transform: scale(0);
+      animation: rippleAnim 0.6s linear;
+      pointer-events: none;
+    }
+
+    @keyframes rippleAnim {
+      to {
+        transform: scale(4);
+        opacity: 0;
+      }
+    }
+
+    /* Navigation Active State */
+    .nav-btn.active {
+      background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+      color: #ffffff;
+      border-color: rgba(255, 255, 255, 0.45);
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+    }
+
+    /* Custom Scrollbar for inner readability */
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(2, 44, 34, 0.4);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(52, 211, 153, 0.4);
+      border-radius: 9999px;
+    }
+  </style>
+</head>
+<body class="antialiased selection:bg-emerald-500 selection:text-white pb-28 sm:pb-24">
+
+  <!-- Ambient Background Orbs -->
+  <div class="ambient-orb orb-1"></div>
+  <div class="ambient-orb orb-2"></div>
+  <div class="ambient-orb orb-3"></div>
+
+  <!-- Floating Particle Canvas -->
+  <canvas id="particleCanvas" class="fixed inset-0 pointer-events-none z-0 opacity-60"></canvas>
+
+  <!-- Main Wrapper (Touch Swipe Enabled) -->
+  <div id="swipeArea" class="relative z-10 max-w-4xl mx-auto px-4 sm:px-6 pt-5 sm:pt-8">
+
+    <!-- Top Header / Page Indicator -->
+    <header class="glass-panel rounded-2xl px-4 py-3 mb-6 flex items-center justify-between gap-3">
+      <div class="flex items-center gap-2.5">
+        <div class="w-9 h-9 rounded-xl bg-emerald-500/25 border border-emerald-400/40 flex items-center justify-center text-emerald-300 font-display font-bold shadow-inner">
+          RJ
+        </div>
+        <div>
+          <p class="text-xs text-emerald-300 font-medium tracking-wider uppercase">Personal Profile</p>
+          <h1 class="text-sm sm:text-base font-display font-bold text-white leading-tight">Rifky Jonathan Tambuwun</h1>
+        </div>
+      </div>
+
+      <!-- Page Dots & Swipe Hint -->
+      <div class="flex items-center gap-3">
+        <span class="hidden md:inline-flex items-center gap-1.5 text-xs text-emerald-200/80 bg-white/10 px-3 py-1 rounded-full border border-white/15">
+          <i class="fa-solid fa-hand-pointer text-emerald-400"></i> Sentuh / Geser Halaman
+        </span>
+        <div id="pageDots" class="flex items-center gap-1.5" aria-label="Indikator Halaman">
+          <button onclick="goToPage(0)" class="dot-btn w-6 h-2.5 rounded-full bg-emerald-400 transition-all duration-300" aria-label="Halaman 1"></button>
+          <button onclick="goToPage(1)" class="dot-btn w-2.5 h-2.5 rounded-full bg-white/30 transition-all duration-300" aria-label="Halaman 2"></button>
+          <button onclick="goToPage(2)" class="dot-btn w-2.5 h-2.5 rounded-full bg-white/30 transition-all duration-300" aria-label="Halaman 3"></button>
+          <button onclick="goToPage(3)" class="dot-btn w-2.5 h-2.5 rounded-full bg-white/30 transition-all duration-300" aria-label="Halaman 4"></button>
+        </div>
+      </div>
+    </header>
+
+    <!-- ========================================================= -->
+    <!-- PAGE 1: BERANDA / PROFIL UTAMA                            -->
+    <!-- ========================================================= -->
+    <main id="page-0" class="page-section active">
+      <div class="glass-panel rounded-3xl p-6 sm:p-10 relative overflow-hidden">
+        <!-- Decorative Top White-Emerald Highlight -->
+        <div class="absolute top-0 inset-x-0 h-1 bg-gradient-to-r from-transparent via-emerald-400 to-transparent opacity-80"></div>
+
+        <div class="flex flex-col md:flex-row items-center gap-7 sm:gap-10">
+          <!-- Profile Photo Container -->
+          <div class="anim-item anim-pop shrink-0" style="--i: 1;">
+            <div class="profile-ring w-40 h-40 sm:w-48 sm:h-48 rounded-full p-1.5 bg-forest-900 shadow-2xl">
+              <img 
+                src="105965.jpg" 
+                alt="Foto Profil Rifky Jonathan Tambuwun" 
+                onerror="this.onerror=null; this.src='https://placehold.co/400x400/064e3b/ffffff?text=Rifky+Tambuwun';"
+                class="w-full h-full object-cover object-top rounded-full border-2 border-white/40"
+              />
+            </div>
+          </div>
+
+          <!-- Main Identity Info -->
+          <div class="text-center md:text-left flex-1">
+            <div class="anim-item inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full glass-white-tint text-emerald-200 text-xs sm:text-sm font-medium mb-3" style="--i: 2;">
+              <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+              <span>Mahasiswa Manajemen & Pemimpin Muda</span>
+            </div>
+
+            <h2 class="anim-item font-display text-2xl sm:text-4xl font-extrabold text-white tracking-tight leading-tight mb-3" style="--i: 3;">
+              Rifky Jonathan <span class="text-emerald-400">Tambuwun</span>
+            </h2>
+
+            <p class="anim-item text-sm sm:text-base text-emerald-100/95 leading-relaxed mb-5 max-w-xl" style="--i: 4;">
+              Mahasiswa S1 Manajemen Fakultas Ekonomi dan Bisnis Universitas Sam Ratulangi Manado serta Wakil Ketua Pelayanan Siswa Kristen Kota Tomohon. Bertumbuh untuk belajar, berkarya, dan melayani.
+            </p>
+
+            <!-- Personal Metadata Cards -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-6 text-left">
+              <div class="anim-item glass-card touch-ripple rounded-2xl p-3.5 flex items-center gap-3.5" style="--i: 5;">
+                <div class="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-400/30 flex items-center justify-center text-emerald-300 shrink-0">
+                  <i class="fa-solid fa-cake-candles text-lg"></i>
+                </div>
+                <div>
+                  <p class="text-[11px] uppercase tracking-wider text-emerald-300 font-semibold">Tempat, Tanggal Lahir</p>
+                  <p class="text-sm font-semibold text-white">TOMOHON, 04 September 2007</p>
+                </div>
+              </div>
+
+              <div class="anim-item glass-card touch-ripple rounded-2xl p-3.5 flex items-center gap-3.5" style="--i: 6;">
+                <div class="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-400/30 flex items-center justify-center text-emerald-300 shrink-0">
+                  <i class="fa-solid fa-location-dot text-lg"></i>
+                </div>
+                <div>
+                  <p class="text-[11px] uppercase tracking-wider text-emerald-300 font-semibold">Domisili</p>
+                  <p class="text-sm font-semibold text-white">Sonder, Kab. Minahasa, Sulawesi Utara</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="anim-item flex flex-wrap items-center justify-center md:justify-start gap-3" style="--i: 7;">
+              <button onclick="goToPage(1)" class="touch-ripple px-5 py-3 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-400 hover:to-emerald-500 text-white font-semibold text-sm shadow-lg shadow-emerald-950/50 border border-white/25 flex items-center gap-2 transition-all active:scale-95">
+                <span>All About Me</span>
+                <i class="fa-solid fa-arrow-right"></i>
+              </button>
+              <button onclick="goToPage(3)" class="touch-ripple px-5 py-3 rounded-xl glass-white-tint hover:bg-white/20 text-white font-semibold text-sm flex items-center gap-2 transition-all active:scale-95">
+                <i class="fa-solid fa-paper-plane text-emerald-300"></i>
+                <span>Hubungi Saya</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Quick Highlights Strip -->
+        <div class="anim-item mt-8 pt-6 border-t border-white/15 grid grid-cols-2 sm:grid-cols-4 gap-3" style="--i: 8;">
+          <div onclick="goToPage(2)" class="glass-card touch-ripple cursor-pointer rounded-2xl p-3 text-center">
+            <p class="text-lg sm:text-xl font-display font-extrabold text-emerald-400">UNSRAT</p>
+            <p class="text-xs text-slate-200 mt-0.5">S1 Manajemen</p>
+          </div>
+          <div onclick="goToPage(2)" class="glass-card touch-ripple cursor-pointer rounded-2xl p-3 text-center">
+            <p class="text-lg sm:text-xl font-display font-extrabold text-white">Wakil Ketua</p>
+            <p class="text-xs text-slate-200 mt-0.5">PSK Kota Tomohon</p>
+          </div>
+          <div onclick="goToPage(2)" class="glass-card touch-ripple cursor-pointer rounded-2xl p-3 text-center">
+            <p class="text-lg sm:text-xl font-display font-extrabold text-emerald-400">2x OSN-K</p>
+            <p class="text-xs text-slate-200 mt-0.5">Biologi & Astronomi</p>
+          </div>
+          <div onclick="goToPage(3)" class="glass-card touch-ripple cursor-pointer rounded-2xl p-3 text-center">
+            <p class="text-lg sm:text-xl font-display font-extrabold text-white">4 Bakat</p>
+            <p class="text-xs text-slate-200 mt-0.5">Seni & Teknologi</p>
+          </div>
+        </div>
+      </div>
+    </main>
+
+    <!-- ========================================================= -->
+    <!-- PAGE 2: ALL ABOUT ME & MINAT KEAHLIAN                     -->
+    <!-- ========================================================= -->
+    <section id="page-1" class="page-section">
+      <div class="glass-panel rounded-3xl p-6 sm:p-8 space-y-6">
+        <!-- Section Header -->
+        <div class="anim-item flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-white/15 pb-4" style="--i: 1;">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-widest text-emerald-400">Mengenal Lebih Dekat</span>
+            <h2 class="font-display text-2xl sm:text-3xl font-extrabold text-white mt-0.5">All about me</h2>
+          </div>
+          <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-xl glass-white-tint text-xs text-emerald-100 self-start sm:self-auto">
+            <i class="fa-solid fa-seedling text-emerald-400"></i>
+            <span>Putra Tanah Minahasa</span>
+          </div>
+        </div>
+
+        <!-- Narrative Paragraphs (High Readability Cards) -->
+        <div class="space-y-4">
+          <div class="anim-item glass-card touch-ripple rounded-2xl p-5 border-l-4 border-l-emerald-400" style="--i: 2;">
+            <p class="text-sm sm:text-base text-slate-100 leading-relaxed text-justify sm:text-left">
+              Halo! Perkenalkan, saya <strong class="text-emerald-300 font-semibold">Rifky Jonathan Tambuwun</strong>, lahir di Tomohon pada 04 September 2007. Sebagai anak muda yang tumbuh di Tanah Minahasa, saya selalu percaya bahwa masa muda adalah waktu terbaik untuk terus belajar, aktif bertumbuh, dan memberikan kontribusi positif bagi lingkungan sekitar. Perjalanan saya dalam dunia organisasi mulai terasah secara nyata saat dipercaya mengemban tugas sebagai <strong class="text-white font-semibold">Koordinator Bidang Pelayanan SMA Negeri 1 Tomohon masa bakti 2024–2025</strong>. Dari pengalaman di lingkungan sekolah tersebut, saya belajar banyak tentang kerja sama tim, kedisiplinan, serta bagaimana merancang kegiatan yang bermanfaat bagi sesama pelajar.
+            </p>
+          </div>
+
+          <div class="anim-item glass-card touch-ripple rounded-2xl p-5 border-l-4 border-l-emerald-500" style="--i: 3;">
+            <p class="text-sm sm:text-base text-slate-100 leading-relaxed text-justify sm:text-left">
+              Langkah tersebut kemudian membawa saya bertumbuh ke ruang lingkup yang lebih luas di tingkat kota. Pada masa bakti <strong class="text-white font-semibold">2025–2026</strong>, saya dipercaya menjabat sebagai <strong class="text-emerald-300 font-semibold">Koordinator Bidang Pelayanan Umum dan Media Center Pelayanan Siswa Kristen Kota Tomohon</strong>, di mana saya banyak terlibat dalam koordinasi program pelayanan sekaligus pengelolaan informasi dan media komunikasi. Kepercayaan serta proses belajar yang terus berjalan akhirnya mengantarkan saya pada tanggung jawab yang lebih besar, yaitu mengemban amanah sebagai <strong class="text-emerald-300 font-semibold">Wakil Ketua Pelayanan Siswa Kristen Kota Tomohon dari tahun 2026 hingga saat ini</strong>. Peran ini melatih saya untuk semakin sigap dalam memimpin, membangun komunikasi yang baik dengan banyak orang, dan memastikan setiap rencana berjalan dengan tertata.
+            </p>
+          </div>
+
+          <div class="anim-item glass-card touch-ripple rounded-2xl p-5 border-l-4 border-l-white/70" style="--i: 4;">
+            <p class="text-sm sm:text-base text-slate-100 leading-relaxed text-justify sm:text-left">
+              Di samping kesibukan berorganisasi dan melayani, saya juga memiliki ketertarikan yang besar di bidang ilmu pengetahuan dan eksplorasi akademik. Rasa ingin tahu serta ketekunan dalam belajar membawa saya meraih <strong class="text-emerald-300 font-semibold">Honorable Mention 1 Olimpiade Sains Nasional Tingkat Kabupaten/Kota Bidang Biologi pada tahun 2023</strong>, dan kembali berprestasi dengan meraih <strong class="text-emerald-300 font-semibold">Honorable Mention 2 Olimpiade Sains Nasional Tingkat Kabupaten/Kota Bidang Astronomi pada tahun 2024</strong>. Bagi saya, perpaduan antara pengalaman organisasi, pengelolaan media center, dan ketertarikan pada dunia sains membentuk cara berpikir yang seimbang—menjadikan saya pribadi yang teliti terhadap detail, komunikatif, terbuka pada hal-hal baru, dan selalu antusias menghadapi setiap tantangan ke depan.
+            </p>
+          </div>
+        </div>
+
+        <!-- Minat & Keahlian -->
+        <div class="pt-2">
+          <div class="anim-item flex items-center gap-2.5 mb-4" style="--i: 5;">
+            <div class="w-8 h-8 rounded-lg bg-emerald-500/25 border border-emerald-400/40 fl
